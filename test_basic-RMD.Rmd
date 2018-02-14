@@ -93,7 +93,7 @@ plot_cont(data = mtcars, var = disp, binw_select = "Hadley")
 
 ```
 
-# Examples of `plot_categ)`
+# Examples of `plot_categ())`
 
 Again, using the `mtcars` data set.
 

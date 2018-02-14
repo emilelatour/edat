@@ -1,0 +1,139 @@
+---
+title: "EEDA examples"
+author: "Emile Latour"
+date: '`r Sys.Date()`'
+output: github_document
+---
+
+<!------ Thanks for any contributions! Please edit the .Rmd, the .md is a byproduct of the .Rmd! --------->
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  eval       = TRUE,    # whether to run code in code chunk
+  echo       = TRUE,    # Whether to show code chunk in final output
+  message    = FALSE,   # whether to preserve messages
+  warning    = FALSE,   # whether to preserve warnings
+  fig.width  = 6,       # consistent width for figures
+  fig.height = 4,       # consistent height for figures
+  out.width  = "100%",   # controls the output size
+  fig.align  = "center" # give plot room to breathe
+  )
+
+#### Other options --------------------------------
+
+## Scientific notation ---------------
+# Turn off scientific notation
+options(scipen = 999)
+
+
+## define format ----------------
+# If you don't define format here, you'll need put `format = "html"` in 
+# every kable function.
+options(knitr.table.format = "html")  # use this option when knitting html
+# options(knitr.table.format = "latex")  # use this option when knitting pdf
+
+
+## Define the repository for packages ----------------
+
+options(repos = c(CRAN = "http://cran.rstudio.com"))
+
+
+#### Packages --------------------------------------
+
+# This is where we load in all the packages we plan to use
+
+# universally useful packages
+if (!require("pacman")) install.packages("pacman")
+if (!require("devtools")) install.packages("devtools")
+
+# github packages
+if (!require("janitor")) devtools::install_github("sfirke/janitor")
+if (packageVersion("janitor") < "0.4.0.9000") {
+  devtools::install_github("sfirke/janitor")
+}
+  
+# Load the list of packages
+pacman::p_load(
+  tidyverse,     # packages ggplot2, tibble, tidyr, readr, purrr, and dplyr 
+  forcats,       # functions for factors, forcats is an anagram for factors
+  broom,         # functions tidy(), glance(), augment()
+  magrittr,      # includes the %<>% assignment-pipe (%>% is loaded from dplyr)
+  rlang,         # For use in tidyevaluation
+  janitor,       # for working with dirty data
+  lubridate,     # for working with dates and times
+  stringr,       # handy string operations
+  knitr,         # A General-Purpose Package for Dynamic Report Generation in R
+  kableExtra,    # Enahced table functions
+  ggthemes,      # Extra Themes, Scales and Geoms for 'ggplot2'
+  scales,        # Scale Functions for Visualization
+  ggpubr,        # Customizing ‘ggplot2’- based publication ready plots
+  here           # Constructs paths to your project's files
+
+  )
+
+```
+
+# Load the script for the EEDA plots
+
+```{r}
+source(
+  here::here("make-eeda-plots.R")
+  )
+
+```
+
+# Examples of `plot_cont()`
+
+The `plot_cont()` function will plot a histogram and table of summary statistics for __continuous__ variables. As one of the inputs, the user can specify the method to use for creating histogram bins.
+
+Below are some examples using the `mtcars` data set.
+
+```{r}
+plot_cont(data = mtcars, var = disp)
+plot_cont(data = mtcars, var = disp, binw_select = "Sturges")
+plot_cont(data = mtcars, var = disp, binw_select = "Scott")
+plot_cont(data = mtcars, var = disp, binw_select = "Hadley")
+
+```
+
+# Examples of `plot_categ()`
+
+The `plot_categ()` function creates a bar plot and frequency table for __categorical__ variables.
+
+Here is an example using the the `mtcars` data set once again.
+
+```{r}
+mt2 <- mtcars %>% 
+  mutate(cyl = factor(cyl))
+
+plot_categ(data = mt2, var = cyl)
+
+```
+
+Or another using th `iris` data set.
+
+```{r}
+plot_categ(data = iris, var = Species)
+```
+
+
+
+# Example of `make_plots()`
+
+The `make_plots()` function takes a data set as an input and, depending on the variable class, will apply either `plot_cont()` or `plot_categ()`. 
+
+An example using the `diamonds` data set fromm the `ggplot2` package.
+
+```{r}
+make_plots(data = diamonds)
+
+```
+
+Note that all three functions are pipeable using `dplyr`. So if instead of the entire data set, you wanted to plot a subset:
+
+```{r}
+diamonds %>% 
+  dplyr::select(carat, color, clarity, price) %>% 
+  make_plots(.)
+```
+

@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
   warning    = FALSE,   # whether to preserve warnings
   fig.width  = 6,       # consistent width for figures
   fig.height = 4,       # consistent height for figures
-  out.width  = "70%",   # controls the output size
+  out.width  = "100%",   # controls the output size
   fig.align  = "center" # give plot room to breathe
   )
 

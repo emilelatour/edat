@@ -264,15 +264,15 @@ plot_categ <-
 
 # prints a plot depending on the class of variables
 
-make_plots <- function(df){
+make_plots <- function(data){
   
-  for (i in names(df)) {
-    if (class(df[[i]])[1] %in% c("ordered", "factor", "character"))
-      print(plot_categ(data = df, var = !! sym(i)))
-    else if (class(df[[i]])[1] %in% c("numeric", "integer"))
-      print(plot_cont(data = df, var = !! sym(i)))
+  for (i in names(data)) {
+    if (class(data[[i]])[1] %in% c("ordered", "factor", "character"))
+      print(plot_categ(data = data, var = !! sym(i)))
+    else if (class(data[[i]])[1] %in% c("numeric", "integer"))
+      print(plot_cont(data = data, var = !! sym(i)))
     else
-      print(paste0("Variable is of class `", class(df[[i]]), "`, 
+      print(paste0("Variable is of class `", class(data[[i]]), "`, 
                    not a `factor` or `numeric`."))
   }
 }

@@ -66,6 +66,7 @@ pacman::p_load(
   kableExtra,    # Enahced table functions
   ggthemes,      # Extra Themes, Scales and Geoms for 'ggplot2'
   scales,        # Scale Functions for Visualization
+  ggpubr,        # Customizing ‘ggplot2’- based publication ready plots
   here           # Constructs paths to your project's files
 
   )

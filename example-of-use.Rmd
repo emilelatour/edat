@@ -1,5 +1,5 @@
 ---
-title: "EEDA examples"
+title: "edat plot examples"
 author: "Emile Latour"
 date: '`r Sys.Date()`'
 output: github_document
@@ -75,7 +75,7 @@ pacman::p_load(
 
 ```{r}
 source(
-  here::here("make-eeda-plots.R")
+  here::here("make-edat-plots.R")
   )
 
 ```
@@ -114,8 +114,6 @@ Or another using th `iris` data set.
 plot_categ(data = iris, var = Species)
 ```
 
-
-
 # Example of `make_plots()`
 
 The `make_plots()` function takes a data set as an input and will apply either `plot_cont()` or `plot_categ()` depending on the variable class. 
@@ -126,6 +124,8 @@ An example using the `diamonds` data set fromm the `ggplot2` package.
 make_plots(data = diamonds)
 
 ```
+
+# It works with the `%>%` oprator
 
 Note that all three functions are pipeable using `dplyr`. So if instead of the entire data set, you wanted to plot a subset:
 

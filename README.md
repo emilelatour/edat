@@ -1,2 +1,2 @@
-# eeda
-Emile's Exploratory Data Analysis - quick plots and tables of a data set
+# edat
+Explore your data: quick plots and tables to explore and document the distributions of the variables in a data set.

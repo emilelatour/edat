@@ -1,4 +1,4 @@
-EEDA examples
+edat plot examples
 ================
 Emile Latour
 2018-02-14
@@ -9,7 +9,7 @@ Load the script for the EEDA plots
 
 ``` r
 source(
-  here::here("make-eeda-plots.R")
+  here::here("make-edat-plots.R")
   )
 ```
 
@@ -80,6 +80,9 @@ make_plots(data = diamonds)
 ```
 
 <img src="example-of-use_files/figure-markdown_github/unnamed-chunk-5-1.png" width="100%" style="display: block; margin: auto;" /><img src="example-of-use_files/figure-markdown_github/unnamed-chunk-5-2.png" width="100%" style="display: block; margin: auto;" /><img src="example-of-use_files/figure-markdown_github/unnamed-chunk-5-3.png" width="100%" style="display: block; margin: auto;" /><img src="example-of-use_files/figure-markdown_github/unnamed-chunk-5-4.png" width="100%" style="display: block; margin: auto;" /><img src="example-of-use_files/figure-markdown_github/unnamed-chunk-5-5.png" width="100%" style="display: block; margin: auto;" /><img src="example-of-use_files/figure-markdown_github/unnamed-chunk-5-6.png" width="100%" style="display: block; margin: auto;" /><img src="example-of-use_files/figure-markdown_github/unnamed-chunk-5-7.png" width="100%" style="display: block; margin: auto;" /><img src="example-of-use_files/figure-markdown_github/unnamed-chunk-5-8.png" width="100%" style="display: block; margin: auto;" /><img src="example-of-use_files/figure-markdown_github/unnamed-chunk-5-9.png" width="100%" style="display: block; margin: auto;" /><img src="example-of-use_files/figure-markdown_github/unnamed-chunk-5-10.png" width="100%" style="display: block; margin: auto;" />
+
+It works with the `%>%` oprator
+===============================
 
 Note that all three functions are pipeable using `dplyr`. So if instead of the entire data set, you wanted to plot a subset:
 

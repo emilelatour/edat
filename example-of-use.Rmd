@@ -31,7 +31,6 @@ options(scipen = 999)
 options(knitr.table.format = "html")  # use this option when knitting html
 # options(knitr.table.format = "latex")  # use this option when knitting pdf
 
-
 ## Define the repository for packages ----------------
 
 options(repos = c(CRAN = "http://cran.rstudio.com"))
@@ -99,7 +98,7 @@ plot_cont(data = mtcars, var = disp, binw_select = "Hadley")
 
 The `plot_categ()` function creates a bar plot and frequency table for __categorical__ variables.
 
-Here is an example using the the `mtcars` data set once again.
+Here is another example using the the `mtcars` data set.
 
 ```{r}
 mt2 <- mtcars %>% 

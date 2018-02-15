@@ -49,7 +49,7 @@ Examples of `plot_categ()`
 
 The `plot_categ()` function creates a bar plot and frequency table for **categorical** variables.
 
-Here is an example using the the `mtcars` data set once again.
+Here is another example using the the `mtcars` data set.
 
 ``` r
 mt2 <- mtcars %>% 

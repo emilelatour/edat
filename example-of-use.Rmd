@@ -119,7 +119,7 @@ plot_categ(data = iris, var = Species)
 
 # Example of `make_plots()`
 
-The `make_plots()` function takes a data set as an input and, depending on the variable class, will apply either `plot_cont()` or `plot_categ()`. 
+The `make_plots()` function takes a data set as an input and will apply either `plot_cont()` or `plot_categ()` depending on the variable class. 
 
 An example using the `diamonds` data set fromm the `ggplot2` package.
 

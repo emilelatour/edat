@@ -25,7 +25,6 @@ knitr::opts_chunk$set(
 # Turn off scientific notation
 options(scipen = 999)
 
-
 ## define format ----------------
 # If you don't define format here, you'll need put `format = "html"` in 
 # every kable function.

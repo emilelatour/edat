@@ -32,76 +32,58 @@ plot_cont <-
     
     #### histogram --------------------------------
     
-    ## Make the base plot ----------------
+    #### Different ways to calc bin width --------------------------------
     
-    p <- ggplot(data = data, ggplot2::aes_(x = var_enq))
-    
-    
-    ## Different ways to calc bin width ----------------
-    
-    if (binw_select == "FD") {
-      p <- p + geom_histogram(
-        stat = "bin",
-        binwidth = function(x) {
-          pretty(range(x), n = nclass.FD(x), min.n = 1, right = TRUE)[2] -
-            pretty(range(x), n = nclass.FD(x), min.n = 1, right = TRUE)[1]
-        },
-        alpha = 0.8,
-        fill = "steelblue",
-        colour = "black"
-      )
-    } else if (binw_select == "Sturges") {
-      p <- p + geom_histogram(
-        stat = "bin",
-        binwidth = function(x) {
-          pretty(range(x), n = nclass.Sturges(x), min.n = 1, right = TRUE)[2] -
-            pretty(range(x), n = nclass.Sturges(x), min.n = 1, right = TRUE)[1]
-        },
-        alpha = 0.8,
-        fill = "steelblue",
-        colour = "black"
-      )
-    } else if (binw_select == "Scott") {
-      p <- p + geom_histogram(
-        stat = "bin",
-        binwidth = function(x) {
-          pretty(range(x), n = nclass.scott(x), min.n = 1, right = TRUE)[2] -
-            pretty(range(x), n = nclass.scott(x), min.n = 1, right = TRUE)[1]
-        },
-        alpha = 0.8,
-        fill = "steelblue",
-        colour = "black"
-      )
-    } else if (binw_select == "Hadley") {
-      p <- p + geom_histogram(
-        stat = "bin",
-        # This is the same as Sturges... Maybe Scott...
-        binwidth = function(x) {
-          2 * IQR(x) / (length(x) ^ (1 / 3))
-        },
-        alpha = 0.8,
-        fill = "steelblue",
-        colour = "black"
-      )
+    calc_bin_width <- function(x, binw_select) {
+      
+      if (binw_select == "FD") {
+        # Freedman-Diaconis (1981)
+        pretty(range(x), n = nclass.FD(x), min.n = 1, right = TRUE)[[2]] -
+          pretty(range(x), n = nclass.FD(x), min.n = 1, right = TRUE)[[1]]
+        
+      } else if (binw_select == "Sturges") {
+        # Sturges (1926)
+        pretty(range(x), n = nclass.Sturges(x), min.n = 1, right = TRUE)[[2]] -
+          pretty(range(x), n = nclass.Sturges(x), min.n = 1, right = TRUE)[[1]]
+        
+      } else if (binw_select == "Scott") {
+        # Scott (1979)
+        pretty(range(x), n = nclass.scott(x), min.n = 1, right = TRUE)[[2]] -
+          pretty(range(x), n = nclass.scott(x), min.n = 1, right = TRUE)[[1]]
+        
+      } else if (binw_select == "Square-root") {
+        # Square-root (N/A)
+        diff(pretty((max(x) - min(x)) / sqrt(length(x))))[[1]]
+        
+      } else if (binw_select == "Rice") {
+        # Rice (1944)
+        diff(pretty((max(x) - min(x)) / 2 * (length(x) ^ (1 / 3))))[[1]]
+        
+      }
     }
     
+    bin_width <- data %>%
+      dplyr::select(!! var_enq) %>%
+      dplyr::filter(!is.na(!! var_enq)) %>%
+      purrr::map_dbl(.x = .,
+                     .f = ~ calc_bin_width(x = .x, binw_select = binw_select))
     
-    ## Add a theme and title ----------------
+    ## Make the base plot ----------------
     
-    p <- p +
+    p <- data %>%
+      dplyr::filter(!is.na(!! var_enq)) %>%
+      ggplot(data = ., ggplot2::aes_(x = var_enq)) +
+      geom_histogram(stat = "bin",
+                     binwidth = bin_width,
+                     alpha = 0.8,
+                     fill = "steelblue",
+                     colour = "black") +
       theme_minimal() +
       labs(
         title = var_name,
         x = "",
         subtitle = subtitle
       )
-    
-    
-    ## facet_wrap if applicable ----------------
-    
-    if (!is.null(facet)) {
-      p <- p + facet_wrap(as.formula(paste("~ ", facet)), scales = "free_x")
-    }
     
     
     ## Plot it ----------------

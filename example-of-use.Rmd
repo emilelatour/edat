@@ -90,7 +90,7 @@ Below are some examples using the `mtcars` data set.
 plot_cont(data = mtcars, var = disp)
 plot_cont(data = mtcars, var = disp, binw_select = "Sturges")
 plot_cont(data = mtcars, var = disp, binw_select = "Scott")
-plot_cont(data = mtcars, var = disp, binw_select = "Hadley")
+plot_cont(data = mtcars, var = disp, binw_select = "Rice")
 
 ```
 

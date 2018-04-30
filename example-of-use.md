@@ -1,7 +1,7 @@
 edat plot examples
 ================
 Emile Latour
-2018-02-14
+2018-04-30
 
 <!------ Thanks for any contributions! Please edit the .Rmd, the .md is a byproduct of the .Rmd! --------->
 Load the script for the EEDA plots
@@ -39,7 +39,7 @@ plot_cont(data = mtcars, var = disp, binw_select = "Scott")
 <img src="example-of-use_files/figure-markdown_github/unnamed-chunk-2-3.png" width="100%" style="display: block; margin: auto;" />
 
 ``` r
-plot_cont(data = mtcars, var = disp, binw_select = "Hadley")
+plot_cont(data = mtcars, var = disp, binw_select = "Rice")
 ```
 
 <img src="example-of-use_files/figure-markdown_github/unnamed-chunk-2-4.png" width="100%" style="display: block; margin: auto;" />

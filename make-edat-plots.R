@@ -10,8 +10,6 @@ require(tidyr)
 require(rlang)
 require(forcats)
 require(janitor)
-# Need to have the development version of ggplot2 installed
-# devtools::install_github("tidyverse/ggplot2", force = TRUE)
 require(ggplot2)
 require(ggpubr)
 require(scales)
